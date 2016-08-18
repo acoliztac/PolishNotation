@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         String text = "2 + 3";
-        String s = "(2 + 3)";
+        String s = "(2 / 3 + 1)";
         converterToPolish(s);
     }
 
@@ -17,7 +17,10 @@ public class Main {
         text = text.replaceAll(" ", "");
         System.out.println(text + " - содержимое входной строки");
 
+        ArrayList<String> result = mainInitialization(text);
+    }
 
+    private static ArrayList<String> mainInitialization(String text) {
         ArrayList<String> result = new ArrayList<String>();
         ArrayList<Character> symbols = new ArrayList<Character>();
         ArrayList<Integer> importance = new ArrayList<Integer>();
@@ -38,16 +41,47 @@ public class Main {
             } else {
                 initializeSymb(text, symbols, importance, i);
             }
+
+//            initializeResult(result, symbols, importance);
         }
 
 //        for (String s : result){
-//            System.out.println(s);
+//            System.out.print(" " + s);
 //        }
 
-        for (int i : importance){
-            System.out.println(i);
+//        for (int i : importance){
+//            System.out.print(i + " ");
+//        }
+
+//        for (char ch : symbols){
+//            System.out.print(ch + " ");
+//        }
+
+        return result;
+    }
+
+    private static void initializeResult(ArrayList<String> result, ArrayList<Character> symbols, ArrayList<Integer> importance) {
+        if (importance.size() < 2){
+            return;
         }
 
+        int last = importance.get(importance.size() - 1);
+        int preLast = importance.get(importance.size() - 2);
+        while (!(last > preLast)){
+            if (importance.size() < 2){
+                break;
+            }
+            else if (last == 4 && preLast == 4){
+                importance.remove(importance.size() - 1);
+                importance.remove(importance.size() - 1);
+                symbols.remove(symbols.size() - 1);
+                symbols.remove(symbols.size() - 1);
+            } else {
+                char tmp = symbols.get(symbols.size() - 2);
+                symbols.remove(symbols.size() - 2);
+                result.add(String.valueOf(tmp));
+            }
+        }
     }
 
     private static void initializeSymb(String text, ArrayList<Character> symbols, ArrayList<Integer> importance, int i) {
