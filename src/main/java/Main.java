@@ -33,15 +33,15 @@ public class Main {
                         break;
                     }
                 }
-                initializeSymb(text, symbols, importance, i);
                 result.add(String.valueOf(sb));
+                initializeSymb(text, symbols, importance, i);
             } else {
                 initializeSymb(text, symbols, importance, i);
             }
         }
 
 //        for (String s : result){
-//            System.out.print(s);
+//            System.out.println(s);
 //        }
 
         for (int i : importance){
@@ -50,8 +50,7 @@ public class Main {
 
     }
 
-    private static void initializeSymb(String text, ArrayList<Character> sym, ArrayList<Integer> importance, int i) {
-        sym.add(text.charAt(i));
+    private static void initializeSymb(String text, ArrayList<Character> symbols, ArrayList<Integer> importance, int i) {
         int imp = 0;
         switch (text.charAt(i)){
             case '=':
@@ -74,5 +73,6 @@ public class Main {
                 break;
         }
         importance.add(imp);
+        symbols.add(text.charAt(i));
     }
 }
