@@ -33,16 +33,46 @@ public class Main {
                         break;
                     }
                 }
-                symbols.add(text.charAt(i));
+                initializeSymb(text, symbols, importance, i);
                 result.add(String.valueOf(sb));
             } else {
-                symbols.add(text.charAt(i));
+                initializeSymb(text, symbols, importance, i);
             }
         }
 
-        for (String s : result){
-            System.out.print(s);
+//        for (String s : result){
+//            System.out.print(s);
+//        }
+
+        for (int i : importance){
+            System.out.println(i);
         }
 
+    }
+
+    private static void initializeSymb(String text, ArrayList<Character> sym, ArrayList<Integer> importance, int i) {
+        sym.add(text.charAt(i));
+        int imp = 0;
+        switch (text.charAt(i)){
+            case '=':
+                imp = 0;
+                break;
+            case '+':
+            case '-':
+                imp = 1;
+                break;
+            case '/':
+            case '*':
+                imp = 2;
+                break;
+            case '^':
+                imp = 3;
+                break;
+            case '(':
+            case ')':
+                imp = 4;
+                break;
+        }
+        importance.add(imp);
     }
 }
