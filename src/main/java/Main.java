@@ -8,8 +8,8 @@ import static java.lang.Character.isDigit;
 public class Main {
     public static void main(String[] args) {
 
-        String text = "2 + 3";
-        String s = "(2 / 3 + 1)";
+        String s = "2 + 3";
+//        String s1 = "(2 / 3 + 1)";
         converterToPolish(s);
     }
 
@@ -37,22 +37,28 @@ public class Main {
                     }
                 }
                 result.add(String.valueOf(sb));
+                if (i == text.length() - 1 && isDigit(text.charAt(i))){
+                    break;
+                }
                 initializeSymb(text, symbols, importance, i);
             } else {
                 initializeSymb(text, symbols, importance, i);
             }
 
-//            initializeResult(result, symbols, importance);
+            initializeResult(result, symbols, importance);
         }
 
+//        System.out.println("result");
 //        for (String s : result){
 //            System.out.print(" " + s);
 //        }
 
+//        System.out.println("importance");
 //        for (int i : importance){
 //            System.out.print(i + " ");
 //        }
 
+//        System.out.println("symbols");
 //        for (char ch : symbols){
 //            System.out.print(ch + " ");
 //        }
