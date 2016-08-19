@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import static java.lang.Character.isDigit;
 import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
 
 /**
  * Created by Никита on 18.08.2016.
@@ -21,9 +20,9 @@ public class Main {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-//        String expression = reader.readLine();
+        String expression = reader.readLine();
         reader.close();
-        String expression = "2 + 3";
+//        String expression = "2 ^ 2.1";
         solution(expression);
     }
 
@@ -38,7 +37,8 @@ public class Main {
                 i -= 2;
             }
         }
-        System.out.println("\tРезультат = " + polish.get(0));
+        String fResult = String.format("%.3f", Double.parseDouble(polish.get(0)));
+        System.out.println("\tРезультат = " + fResult);
     }
 
     private static void decision(ArrayList<String> polish, int i) {
@@ -61,6 +61,7 @@ public class Main {
 
     private static ArrayList<String> converterToPolish(String text) {
         text = text.replaceAll(" ", "");
+        text = text.replaceAll(",", ".");
         System.out.println(text + ": форматированное исходное выражение");
 
         ArrayList<String> result = mainInitialization(text);
@@ -82,8 +83,11 @@ public class Main {
             if (isDigit(text.charAt(i))){
                 for (int j = i; j < text.length(); j++) {
                     i = j;
-                    if (isDigit(text.charAt(j))){
-                        sb.append(text.charAt(j));
+                    char ch = text.charAt(j);
+                    if (isDigit(ch)){
+                        sb.append(ch);
+                    } else if (ch == '.' || ch == ',' ) {
+                        sb.append('.');
                     } else {
                         break;
                     }
