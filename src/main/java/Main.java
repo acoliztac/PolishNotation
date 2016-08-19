@@ -14,7 +14,8 @@ public class Main {
         String s3 = "1 - 2*3 + 4";
         String s4 = "1 + 2 * (3 - 4)";
         String s5 = "5 * 3 - 4 ^ 2 +2/(2 -11)";
-        converterToPolish(s3);
+        String s6 = "2 * (3-1) - (2 + 1) + 5";
+        converterToPolish(s6);
     }
 
     private static void converterToPolish(String text) {
@@ -26,6 +27,7 @@ public class Main {
         for (String s : result){
             System.out.print(s);
         }
+        System.out.println(" - результат");
     }
 
     private static ArrayList<String> mainInitialization(String text) {
@@ -70,6 +72,7 @@ public class Main {
 //        for (int i : importance){
 //            System.out.print(i + " ");
 //        }
+//        System.out.println("");
 //
 //        System.out.println("symbols");
 //        for (char ch : symbols){
@@ -84,8 +87,10 @@ public class Main {
             if (importance.size() < 2){
                 break;
             }
+
             int preLast = importance.get(importance.size() - 2);
             int last = importance.get(importance.size() - 1);
+
             if (preLast == 4 && !(last == 5)) {
                 break;
             } else if (preLast == 4 && last == 5) {
@@ -93,7 +98,7 @@ public class Main {
                 importance.remove(importance.size() - 1);
                 symbols.remove(symbols.size() - 1);
                 symbols.remove(symbols.size() - 1);
-            } else if (!(preLast < last)) {
+            } else if (!(preLast < last) || last == 5) {
                 char tmp = symbols.get(symbols.size() - 2);
                 symbols.remove(symbols.size() - 2);
                 importance.remove(importance.size() - 2);
