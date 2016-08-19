@@ -8,13 +8,19 @@ import static java.lang.Character.isDigit;
 public class Main {
     public static void main(String[] args) {
 
-        String s = "2 + 3";
+        String s = "2 + 1";
         String s1 = "(2 / 3 + 1)";
         String s2 = "4 * 5+3";
         String s3 = "1 - 2*3 + 4";
         String s4 = "1 + 2 * (3 - 4)";
         String s5 = "5 * 3 - 4 ^ 2 +2/(2 -11)";
-        String s6 = "2 * (3-1) - (2 + 1) + 5";
+        String s6 = "2 * (3-1) - (2 + 1) + 12";
+        converterToPolish(s);
+        converterToPolish(s1);
+        converterToPolish(s2);
+        converterToPolish(s3);
+        converterToPolish(s4);
+        converterToPolish(s5);
         converterToPolish(s6);
     }
 
@@ -25,7 +31,7 @@ public class Main {
         ArrayList<String> result = mainInitialization(text);
 
         for (String s : result){
-            System.out.print(s);
+            System.out.print(s + " ");
         }
         System.out.println(" - результат");
     }
@@ -39,10 +45,10 @@ public class Main {
             StringBuilder sb = new StringBuilder();
             if (isDigit(text.charAt(i))){
                 for (int j = i; j < text.length(); j++) {
+                    i = j;
                     if (isDigit(text.charAt(j))){
                         sb.append(text.charAt(j));
                     } else {
-                        i = j;
                         break;
                     }
                 }
@@ -58,7 +64,6 @@ public class Main {
             initializeResult(result, symbols, importance);
 
         }
-
         for (int i = symbols.size() - 1; i >= 0; i--) {
             result.add(String.valueOf(symbols.get(i)));
         }
@@ -111,6 +116,9 @@ public class Main {
 
     private static void initializeSymb(String text, ArrayList<Character> symbols, ArrayList<Integer> importance, int i) {
         int imp = 0;
+        if (isDigit(text.charAt(i))){
+            return;
+        }
         switch (text.charAt(i)){
             case '=':
                 imp = 0;
