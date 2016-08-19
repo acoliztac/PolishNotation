@@ -16,12 +16,7 @@ public class Main {
         String s5 = "5 * 3 - 4 ^ 2 +2/(2 -11)";
         String s6 = "2 * (3-1) - (2 + 1) + 12";
         converterToPolish(s);
-        converterToPolish(s1);
-        converterToPolish(s2);
-        converterToPolish(s3);
-        converterToPolish(s4);
-        converterToPolish(s5);
-        converterToPolish(s6);
+        
     }
 
     private static void converterToPolish(String text) {
